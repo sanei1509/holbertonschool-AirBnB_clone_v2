@@ -83,7 +83,7 @@ Usage: create <class_name>
 ###### Example 1: Show an object
 Usage: show <class_name> <_id>
 
-```
+```bash
 (hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 [BaseModel] (3aa5babc-efb6-4041-bfe9-3cc9727588f8) {'id': '3aa5babc-efb6-4041-bfe9-3cc9727588f8', 'created_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96959), 
 'updated_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96971)}
@@ -91,7 +91,7 @@ Usage: show <class_name> <_id>
 ```
 ###### Example 2: Destroy an object
 Usage: destroy <class_name> <_id>
-```
+```bash
 (hbnb) destroy BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 (hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 ** no instance found **
@@ -99,7 +99,7 @@ Usage: destroy <class_name> <_id>
 ```
 ###### Example 3: Update an object
 Usage: update <class_name> <_id>
-```c
+```bash
 (hbnb) update BaseModel b405fc64-9724-498f-b405-e4071c3d857f first_name "person"
 (hbnb) show BaseModel b405fc64-9724-498f-b405-e4071c3d857f
 [BaseModel] (b405fc64-9724-498f-b405-e4071c3d857f) {'id': 'b405fc64-9724-498f-b405-e4071c3d857f', 'created_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729889), 
@@ -110,14 +110,14 @@ Usage: update <class_name> <_id>
 
 ###### Example 0: Show all User objects
 Usage: <class_name>.all()
-```c
+```bash
 (hbnb) User.all()
 ["[User] (99f45908-1d17-46d1-9dd2-b7571128115b) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 34, 92071), 'id': '99f45908-1d17-46d1-9dd2-b7571128115b', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 34, 92056)}", "[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
 ```
 
 ###### Example 1: Destroy a User
 Usage: <class_name>.destroy(<_id>)
-```c
+```bash
 (hbnb) User.destroy("99f45908-1d17-46d1-9dd2-b7571128115b")
 (hbnb)
 (hbnb) User.all()
@@ -125,7 +125,7 @@ Usage: <class_name>.destroy(<_id>)
 ```
 ###### Example 2: Update User (by attribute)
 Usage: <class_name>.update(<_id>, <attribute_name>, <attribute_value>)
-```c
+```bash
 (hbnb) User.update("98bea5de-9cb0-4d78-8a9d-c4de03521c30", name "Todd the Toad")
 (hbnb)
 (hbnb) User.all()
@@ -133,7 +133,7 @@ Usage: <class_name>.update(<_id>, <attribute_name>, <attribute_value>)
 ```
 ###### Example 3: Update User (by dictionary)
 Usage: <class_name>.update(<_id>, <dictionary>)
-```c
+```bash
 (hbnb) User.update("98bea5de-9cb0-4d78-8a9d-c4de03521c30", {'name': 'Fred the Frog', 'age': 9})
 (hbnb)
 (hbnb) User.all()
