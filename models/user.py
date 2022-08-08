@@ -5,7 +5,7 @@ from sqlalchemy import Column, Integer, String
 
 
 class User(BaseModel, Base):
-    """This class defines a user by various attributes"""
+    """This class defines the user by various attributes"""
     __tablename__ = "users"
 
     email = Column(String(128), nullable=False)
