@@ -5,6 +5,7 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
+Base = declarative_base()
 
 class BaseModel:
     """A base class for all hbnb models"""
@@ -39,7 +40,7 @@ class BaseModel:
 
     def delete(self):
         """ delete the current instance for the storage"""
-        models.storage.delete()
+        storage.delete()
 
     def to_dict(self):
         """Convert instance into dict format"""
@@ -51,6 +52,6 @@ class BaseModel:
         dictionary['updated_at'] = self.updated_at.isoformat()
 
         for key, value in dictionary.items():
-            if key == "_sa_instance_state"
+            if key == "_sa_instance_state":
                 del dictionary[key]
         return dictionary
