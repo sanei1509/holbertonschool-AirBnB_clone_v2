@@ -4,20 +4,24 @@ from models.base_model import BaseModel, Base
 from datetime import datetime
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from models import storage
+from models.city import City
+import models
+
 
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
 
     name = Column(String(128), nullable=False)
-    cities = relationship("City", cascade="all, delete-orphan", backref="state")
+    cities = relationship("City", cascade="all, delete-orphan",
+                          backref="state")
 
+    @property
     def cities(self):
         """devolver una lista de instancias de city"""
         inst_list = []
-        list_objects = storage.all(City)
-        for key, value in list_objects.items():
-            if value.state_id == self.id:
-                inst_list.append(list_objects[key])
+        list_objects = models.storage.all(City)
+        for city in list_objects.values():
+            if city.state_id == self.id:
+                inst_list.append(city)
         return inst_list
