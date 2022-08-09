@@ -228,42 +228,19 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
-        type_storage = os.getenv("HBNB_TYPE_STORAGE")
+
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
             # Correción de codigo, change _FileStorage__objects [ERROR]
-            if type_storage == "db":
-                user = os.getenv("HBNB_MYSQL_USER")
-                pwd = os.getenv("HBNB_MYSQL_PWD")
-                host = os.getenv("HBNB_MYSQL_HOST")
-                db_name = os.getenv("HBNB_MYSQL_DB")
-                self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".
-                                              format(user,
-                                                     pwd,
-                                                     host,
-                                                     db_name),
-                                              pool_pre_ping=True)
-                Session = sessionmaker(bind=self.__engine)
-                session = Session()
-
-                data = session.query(eval(args)).all()
-                # atributos = dir(data)
-                for obj in data:
-                    nm = obj.__class__.__name__
-                    # print_list.append(dir(obj))
-                    # if "_sa_instance_state" not in dir(obj):
-                    print_list.append(f"[{nm}] ({obj.id}) {obj.__dict__}")
-            else:
-                for k, v in storage._FileStorage__objects.items():
-                    if k.split('.')[0] == args:
-                        print_list.append(str(v))
+            for k, v in storage.all(self.classes[args]).items():
+                if k.split('.')[0] == args:
+                    print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 print_list.append(str(v))
-
         print(print_list)
 
     def help_all(self):
