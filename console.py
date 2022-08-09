@@ -124,28 +124,32 @@ class HBNBCommand(cmd.Cmd):
         """ Create an object of any class"""
         arr = []
         arr = args.split(" ")
-        cls = arr[0]
-        attrs = arr[1:]
-        cleaned_attr = []
-        numbers_data = []
 
-        if not cls:
+        if not arr[0]:
             print("** class name missing **")
             return
-        elif cls not in HBNBCommand.classes:
+        elif arr[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
+        other_data = []
 
-        new_instance = HBNBCommand.classes[cls]()
-
-        if len(attrs) > 1:
-            for attr in attrs:
+        if len(arr) > 1:
+            for arg in arr[1:]:
                 """parseamos argumentos"""
-                arg = attr.split("=")
-                key = arg[0]
-                value = arg[1].replace("_", " ")
-                value = value.strip('"')
-                setattr(new_instance, key, value)
+                chars = '"'
+                arg = ''.join(x for x in arg if x not in chars)
+                other_data.append(arg)
+
+        new_instance = HBNBCommand.classes[arr[0]]()
+
+        """tipos de los valores de atributos por revisar"""
+        for attr in other_data:
+            key = attr.split("=")
+            atributo = key[0]
+            # print(type(atributo))
+            value = key[1].replace("_", " ")
+            # print(type(new_instance.atributo))
+            setattr(new_instance, key[0], value)
 
         new_instance.save()
         print(new_instance.id)
