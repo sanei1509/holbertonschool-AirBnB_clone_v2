@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship
 from models.review import Review
 import os
@@ -21,10 +21,23 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
+    amenity_ids = []
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         reviews = relationship('Review', backref='place',
                                cascade='all, delete-orphan')
+
+        place_amenity = Table("place_amenity", Base.metadata,
+                              Column("place_id", String(60),
+                                     ForeignKey("places.id"),
+                                     primary_key=True),
+                              Column("amenity_id", String(60),
+                                     ForeignKey("amenities.id"),
+                                     primary_key=True))
+
+        r_amenities = relationship("Amenity",  secondary="place_amenity",
+                                   viewonly=False)
+
     else:
         @property
         def reviews(self):
@@ -33,3 +46,16 @@ class Place(BaseModel, Base):
                 if self.id == value.place_id:
                     list_reviews.append(value)
             return list_reviews
+
+        """Getter task 10"""
+        @property
+        def amenities(self):
+            """obtenemos la lista de instances"""
+            return self.r_amenities
+        """Setter task 10"""
+        @amenities.setter
+        def amenities(self, obj=None):
+            """seteamos atributos de amenities"""
+            list_ams = []
+            if type(obj) == "Amenity":
+                list_ams.append(obj)
