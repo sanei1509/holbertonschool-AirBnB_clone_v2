@@ -137,18 +137,17 @@ class HBNBCommand(cmd.Cmd):
                 arg = ''.join(x for x in arg if x not in chars)
                 other_data.append(arg)
 
+        # print(other_data)
         new_instance = HBNBCommand.classes[arr[0]]()
 
         """tipos de los valores de atributos por revisar"""
         for attr in other_data:
             key = attr.split("=")
             atributo = key[0]
-            # print(type(atributo))
             value = key[1].replace("_", " ")
-            # print(type(new_instance.atributo))
             setattr(new_instance, key[0], value)
 
-        storage.save()
+        storage.new(new_instance)
         print(new_instance.id)
         storage.save()
 
