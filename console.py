@@ -128,7 +128,6 @@ class HBNBCommand(cmd.Cmd):
         attrs = arr[1:]
         cleaned_attr = []
         numbers_data = []
-        
 
         if not cls:
             print("** class name missing **")
@@ -136,7 +135,7 @@ class HBNBCommand(cmd.Cmd):
         elif cls not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        
+
         new_instance = HBNBCommand.classes[cls]()
 
         if len(attrs) > 1:
@@ -145,23 +144,11 @@ class HBNBCommand(cmd.Cmd):
                 arg = attr.split("=")
                 key = arg[0]
                 value = arg[1].replace("_", " ")
+                value = value.strip('"')
                 setattr(new_instance, key, value)
 
         new_instance.save()
         print(new_instance.id)
-
-        # print(other_data)
-        #new_instance = HBNBCommand.classes[arr[0]]()
-
-        #"""tipos de los valores de atributos por revisar"""
-        #for attr in other_data:
-        #    key = attr.split("=")
-        #    atributo = key[0]
-        #    value = key[1].replace("_", " ")
-        #    setattr(new_instance, atributo, value)
-        
-        #print(new_instance.id)
-        #storage.save() 
 
     def help_create(self):
         """ Help information for the create method """
