@@ -124,35 +124,44 @@ class HBNBCommand(cmd.Cmd):
         """ Create an object of any class"""
         arr = []
         arr = args.split(" ")
+        cls = arr[0]
+        attrs = arr[1:]
+        cleaned_attr = []
+        numbers_data = []
+        
 
-        if not arr[0]:
+        if not cls:
             print("** class name missing **")
             return
-        elif arr[0] not in HBNBCommand.classes:
+        elif cls not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        other_data = []
+        
+        new_instance = HBNBCommand.classes[cls]()
 
-        if len(arr) > 1:
-            for arg in arr[1:]:
+        if len(attrs) > 1:
+            for attr in attrs:
                 """parseamos argumentos"""
-                chars = '"'
-                arg = ''.join(x for x in arg if x not in chars)
-                other_data.append(arg)
+                arg = attr.split("=")
+                key = arg[0]
+                value = arg[1].replace("_", " ")
+                setattr(new_instance, key, value)
+
+        new_instance.save()
+        print(new_instance.id)
 
         # print(other_data)
-        new_instance = HBNBCommand.classes[arr[0]]()
+        #new_instance = HBNBCommand.classes[arr[0]]()
 
-        """tipos de los valores de atributos por revisar"""
-        for attr in other_data:
-            key = attr.split("=")
-            atributo = key[0]
-            value = key[1].replace("_", " ")
-            setattr(new_instance, key[0], value)
-
-        storage.new(new_instance)
-        print(new_instance.id)
-        storage.save()
+        #"""tipos de los valores de atributos por revisar"""
+        #for attr in other_data:
+        #    key = attr.split("=")
+        #    atributo = key[0]
+        #    value = key[1].replace("_", " ")
+        #    setattr(new_instance, atributo, value)
+        
+        #print(new_instance.id)
+        #storage.save() 
 
     def help_create(self):
         """ Help information for the create method """

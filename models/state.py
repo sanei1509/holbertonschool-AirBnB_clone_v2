@@ -17,15 +17,16 @@ class State(BaseModel, Base):
     
     if type_storage == "db":
         name = Column(String(128), nullable=False)
-        cities = relationship("City", cascade="all, delete-orphan",
-                              backref="state")
+        cities = relationship("City", backref="state", cascade="all, delete")
     else:
-        @property
-        def cities(self):
-            """devolver una lista de instancias de city"""
-            inst_list = []
-            list_objects = models.storage.all(City)
-            for city in list_objects.values():
-                if city.state_id == self.id:
-                    inst_list.append(city)
-            return inst_list
+        name = ""
+        
+    @property
+    def cities(self):
+        """devolver una lista de instancias de city"""
+        inst_list = []
+        list_objects = models.storage.all(City)
+        for city in list_objects.values():
+            if city.state_id == self.id:
+                inst_list.append(city)
+        return inst_list
