@@ -3,7 +3,7 @@
 from models.base_model import BaseModel, Base
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, ForeignKey
-# from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship
 from models.place import Place
 
 
