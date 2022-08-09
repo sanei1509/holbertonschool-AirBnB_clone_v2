@@ -37,23 +37,21 @@ class DBStorage():
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        from models.base_model import BaseModel
-        """ all """
-        clases = {
-                    'BaseModel': BaseModel, 'User': User, 'Place': Place,
-                    'State': State, 'City': City, 'Amenity': Amenity,
-                    'Review': Review
-        }
-        cls_list = []
-        if cls is None:
-            cls_list.append(clases[cls])
+        """peticion de todos los objetos"""
         obj_dic = {}
-        for clase in cls_list:
-            all_data = self.__session.query(clase).all()
-            for obj in all_data:
-                key = obj.__class__.__name__ + "." + obj.id
+        if not cls:
+            clases = ["User", "State", "City", "Amenity", "Place", "Review"]
+            for x in clases:
+                all_data = self.__session.query(x)
+                key = x + "." + x.id
+                obj_dic[key] = x
+            return obj_dic
+        else:
+            data = self.__session.query(cls)
+            for obj in data:
+                key = cls.__name__ + "." + obj.id
                 obj_dic[key] = obj
-        return obj_dic
+            return obj_dic
 
     def new(self, obj):
         '''add the boj to current db session'''
