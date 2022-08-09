@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship
 from models.review import Review
 import os
 
+
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
