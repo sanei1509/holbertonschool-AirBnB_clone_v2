@@ -56,7 +56,8 @@ class BaseModel:
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
 
-        for key, value in dictionary.items():
+        cp_dic = dictionary.copy()
+        for key, value in cp_dic.items():
             if key == "_sa_instance_state":
                 del dictionary[key]
         return dictionary
