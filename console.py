@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 """ Console Module """
+from pprint import pprint
+
+
 import cmd
 import sys
 from models.base_model import BaseModel
@@ -247,8 +250,11 @@ class HBNBCommand(cmd.Cmd):
                 session = Session()
 
                 data = session.query(eval(args)).all()
+                # atributos = dir(data)
                 for obj in data:
                     nm = obj.__class__.__name__
+                    # print_list.append(dir(obj))
+                    # if "_sa_instance_state" not in dir(obj):
                     print_list.append(f"[{nm}] ({obj.id}) {obj.__dict__}")
             else:
                 for k, v in storage._FileStorage__objects.items():
