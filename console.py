@@ -248,7 +248,7 @@ class HBNBCommand(cmd.Cmd):
 
                 data = session.query(eval(args)).all()
                 for obj in data:
-                    print_list.append(obj)
+                    print_list.append(f"[{obj.__class__.__name__}] ({obj.id}) {obj.__dict__}")
             else:
                 for k, v in storage._FileStorage__objects.items():
                     if k.split('.')[0] == args:
