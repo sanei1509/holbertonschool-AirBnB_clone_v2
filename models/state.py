@@ -14,13 +14,12 @@ class State(BaseModel, Base):
     type_storage = os.getenv("HBNB_TYPE_STORAGE")
     __tablename__ = "states"
 
-    
     if type_storage == "db":
         name = Column(String(128), nullable=False)
         cities = relationship("City", backref="state", cascade="all, delete")
     else:
         name = ""
-        
+
     @property
     def cities(self):
         """devolver una lista de instancias de city"""

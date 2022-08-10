@@ -12,7 +12,7 @@ class City(BaseModel, Base):
     """ The city class, contains state ID and name """
     type_storage = os.getenv("HBNB_TYPE_STORAGE")
     __tablename__ = "cities"
-    
+
     if type_storage == "db":
         name = Column(String(128), nullable=False)
         state_id = Column(String(60), ForeignKey("states.id"), nullable=False,)
