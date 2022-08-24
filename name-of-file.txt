@@ -1,0 +1,5 @@
+
+tar -cvzf versions/web-static_20220824205203.tgz web_static
+
+actual
+web-static_20220824205800.tgz
