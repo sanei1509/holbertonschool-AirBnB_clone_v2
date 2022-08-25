@@ -18,6 +18,6 @@ def do_pack():
     name = "versions/web-static_" + time
     try:
         local("tar -cvzf " + name + ".tgz web_static")
-        return f"{name}.tgz"
+        return "{}.tgz".format(name)
     except Exception:
         return None
