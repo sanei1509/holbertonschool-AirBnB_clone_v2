@@ -14,7 +14,7 @@ def do_pack():
     sino devuelve None
     """
     local("mkdir -p versions/")
-    time = datetime.now().strftime("%Y%m%d%H%M%S")
+    time = datetime.now().strftime("%Y%M%d%H%M%S")
     name_file = "versions/web-static_{}.tgz".format(time)
     try:
         local("tar -cvzf {} web_static/".format(name_file))
