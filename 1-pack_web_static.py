@@ -19,5 +19,5 @@ def do_pack():
     try:
         local("tar -cvzf " + name + ".tgz web_static")
         return "{}.tgz".format(name)
-    except Exception:
+    except:
         return None
