@@ -3,7 +3,8 @@
 # -f del ln -> si existe debe eliminarse y volver a crearse
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
-echo "<html>
+echo "
+<html>
   <head>
   </head>
   <body>
