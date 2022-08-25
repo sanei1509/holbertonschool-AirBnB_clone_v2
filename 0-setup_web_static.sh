@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # Script que usen los servidores web creados para el deploy web static
 # -f del ln -> si existe debe eliminarse y volver a crearse
+sudo apt-get -y install nginx
+sudo apt-get update
+sudo apt-get -y upgrade
+
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 echo "
