@@ -5,7 +5,8 @@ fabric script
 -	using the function do_deploy
 """
 import os
-from fabric.api import run, put, env
+from fabric.api import run, put, env, local
+from datetime import datetime
 
 env.hosts = ['54.226.169.216', '54.91.221.19']
 env.user = "ubuntu"
