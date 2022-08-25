@@ -17,7 +17,7 @@ def do_pack():
     time = datetime.now().strftime("%Y%m%d%H%M%S")
     name_file = "versions/web-static_{}.tgz".format(time)
     try:
-        local("tar -cvzf {} web_static".format(name_file))
+        local("tar -cvzf {} web_static/".format(name_file))
         return name_file
     except Exception:
         return None
