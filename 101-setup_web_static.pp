@@ -1,29 +1,36 @@
 # Automatizar la tarea 1
 
-#Update
-exec { 'update'
+exec { 'update':
+  command  => 'sudo apt-get -y update',
   provider => shell,
-  command => 'sudo apt-get -y update'
-  before => Exec['nginx'],
+  before   => Exec['install_Nginx'],
 }
 
-#Instalar nginx
-exec { 'nginx'
+exec {'install_Nginx':
+  command  => 'sudo apt-get -y install nginx',
   provider => shell,
-  command =>  command => 'sudo apt-get -y install nginx',
-  before => Exec['crear carpetas'],
+  before   => Exec['start_Nginx'],
 }
 
-#Crear carpetas
-exec { 'crear carpetas':
+exec {'start_Nginx':
+  command  => 'sudo service nginx start',
   provider => shell,
-  command  => 'sudo mkdir -p /data/web_static/releases/test/; sudo mkdir -p /data/web_static/shared/',
-  before   => Exec['creando contenido'],
+  before   => Exec['create_directory'],
 }
 
-#Añadiendo contenido estatico
-exec { 'creando contenido':
+exec {'create_directory':
+  command  => 'sudo mkdir -p /data/web_static/releases/test/',
   provider => shell,
+  before   => Exec['create_other_directory'],
+}
+
+exec {'create_other_directory':
+  command  => 'sudo mkdir -p /data/web_static/shared/',
+  provider => shell,
+  before   => Exec['content_for_html'],
+}
+
+exec {'content_for_html':
   command  => 'echo "
 <html>
   <head>
@@ -33,32 +40,29 @@ exec { 'creando contenido':
   </body>
 </html>" > /data/web_static/releases/test/index.html
 ',
-  before   => Exec[creo symbolic link],
+  provider => shell,
+  before   => Exec['create_symbolic_link'],
 }
 
-#
-#Creando link simbolico
-exec { 'creo symbolic link':
-  provider => shell,
+exec {'create_symbolic_link':
   command  => 'sudo ln -sf /data/web_static/releases/test/ /data/web_static/current',
-  before   => Exec['create alias config'],
+  provider => shell,
+  before   => Exec['put_fabric'],
 }
 
-#Creando la configuración del alias para nuestra vista
-exec { 'create alias config':
+exec {'put_fabric':
+  command  => 'sed -i "56i location /hbnb_static/ {\nalias /data/web_static/current/;\n}\n" /etc/nginx/sites-enabled/default',
   provider => shell,
-  command  => 'sed -i "55i location /hbnb_static/ {\nalias /data/web_static/current/;\n}\n" /etc/nginx/sites-enabled/default',
-  before   => Exec['restart web server'],
+  before   => Exec['restart_Nginx'],
 }
 
-#Reiniciamos nginx para confirmar configuración
-exec {'restart web server':
-  provider => shell,
+exec {'restart_Nginx':
   command  => 'sudo service nginx restart',
-  before   => File['data file'],
+  provider => shell,
+  before   => File['/data/']
 }
 
-file {'data file'
+file {'/data/':
   ensure  => directory,
   owner   => 'ubuntu',
   group   => 'ubuntu',
