@@ -1,36 +1,37 @@
 # Automatizar la tarea 1
 
 exec { 'update':
+  provider => shell,
   command  => 'sudo apt-get -y update',
-  provider => shell,
-  before   => Exec['install_Nginx'],
+  before   => Exec['nginx'],
 }
 
-exec {'install_Nginx':
+exec {'nginx':
+  provider => shell,
   command  => 'sudo apt-get -y install nginx',
-  provider => shell,
-  before   => Exec['start_Nginx'],
+  before   => Exec['inicio web server'],
 }
 
-exec {'start_Nginx':
-  command  => 'sudo service nginx start',
+exec {'inicio web server':
   provider => shell,
+  command  => 'sudo service nginx start',
   before   => Exec['create_directory'],
 }
 
 exec {'create_directory':
-  command  => 'sudo mkdir -p /data/web_static/releases/test/',
   provider => shell,
+  command  => 'sudo mkdir -p /data/web_static/releases/test/',
   before   => Exec['create_other_directory'],
 }
 
 exec {'create_other_directory':
-  command  => 'sudo mkdir -p /data/web_static/shared/',
   provider => shell,
+  command  => 'sudo mkdir -p /data/web_static/shared/',
   before   => Exec['content_for_html'],
 }
 
 exec {'content_for_html':
+  provider => shell,
   command  => 'echo "
 <html>
   <head>
@@ -40,31 +41,30 @@ exec {'content_for_html':
   </body>
 </html>" > /data/web_static/releases/test/index.html
 ',
-  provider => shell,
   before   => Exec['create_symbolic_link'],
 }
 
 exec {'create_symbolic_link':
-  command  => 'sudo ln -sf /data/web_static/releases/test/ /data/web_static/current',
   provider => shell,
+  command  => 'sudo ln -sf /data/web_static/releases/test/ /data/web_static/current',
   before   => Exec['put_fabric'],
 }
 
 exec {'put_fabric':
-  command  => 'sed -i "56i location /hbnb_static/ {\nalias /data/web_static/current/;\n}\n" /etc/nginx/sites-enabled/default',
   provider => shell,
-  before   => Exec['restart_Nginx'],
+  command  => 'sed -i "55i location /hbnb_static/ {\nalias /data/web_static/current/;\n}\n" /etc/nginx/sites-enabled/default',
+  before   => Exec['restart web server'],
 }
 
-exec {'restart_Nginx':
+exec {'restart web server':
+  provider => shell,
   command  => 'sudo service nginx restart',
-  provider => shell,
-  before   => File['/data/']
+  before   => File['data file'],
 }
 
-file {'/data/':
+file {'data file':
   ensure  => directory,
+  recurse => true,
   owner   => 'ubuntu',
   group   => 'ubuntu',
-  recurse => true,
 }
