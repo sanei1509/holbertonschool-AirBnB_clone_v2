@@ -55,7 +55,7 @@ exec { 'create alias config':
 exec {'restart web server':
   provider => shell,
   command  => 'sudo service nginx restart',
-  before   => File['data file']
+  before   => File['data file'],
 }
 
 file {'data file'
