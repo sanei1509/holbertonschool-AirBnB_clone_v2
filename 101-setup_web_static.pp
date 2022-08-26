@@ -54,5 +54,13 @@ exec { 'create alias config':
 #Reiniciamos nginx para confirmar configuración
 exec {'restart web server':
   provider => shell,
-  command  => 'sudo service nginx restart'
+  command  => 'sudo service nginx restart',
+  before   => File['data file']
+}
+
+file {'data file'
+  ensure  => directory,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  recurse => true,
 }
