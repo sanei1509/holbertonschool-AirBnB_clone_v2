@@ -6,11 +6,11 @@ Starts a small web aplication
 - display "Hello HBNB!"
 """
 app = Flask(__name__)
-"""hacemos que las entradas sean flexible con los slashes (/)"""
 
 
 @app.route("/", strict_slashes=False)
 def hello_world():
+    """en la ruta default de la aplicación display string"""
     return "Hello HBNB!"
 
 
