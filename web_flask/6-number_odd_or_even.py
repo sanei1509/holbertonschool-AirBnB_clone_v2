@@ -71,7 +71,7 @@ def render_html(n):
 
 
 @app.route('/number_odd_or_even/<int:n>')
-def oddeven_template(n):
+def work_numbers(n):
     """ Trabajar numeros pasados por parametros en la pagina """
     return render_template('6-number_odd_or_even.html', number=n)
 
