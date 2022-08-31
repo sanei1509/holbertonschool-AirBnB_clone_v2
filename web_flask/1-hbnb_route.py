@@ -15,11 +15,13 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def hello_world():
+    """en la ruta default de la aplicación display string"""
     return "Hello HBNB!"
 
 
 @app.route("/hbnb", strict_slashes=False)
 def hbnb_route():
+    """rutear /hbnb"""
     return "HBNB"
 
 
