@@ -90,7 +90,7 @@ def off_all(self):
 @app.route("/states_list", strict_slashes=False)
 def states_list():
     """ importando la data desde storage """
-    states = storage.all("State").values()
+    states = storage.all("states").values()
     return render_template("7-states_list.html", states=states)
 
 
