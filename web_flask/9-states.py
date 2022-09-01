@@ -87,7 +87,7 @@ def off_all(self):
     storage.close()
 
 
-@app.route("/cities_by_states", strict_slashes=False)
+@app.route("/states", strict_slashes=False)
 def states_list():
     """ importando la data desde storage """
     states = storage.all(State).values()
