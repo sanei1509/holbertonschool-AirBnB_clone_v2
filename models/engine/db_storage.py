@@ -72,3 +72,10 @@ class DBStorage():
         ses = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(ses)
         self.__session = Session()
+
+    def close(self):
+        '''
+        Call remove() method on the private session attribute
+        Info: https://docs.sqlalchemy.org/en/13/orm/contextual.html
+        '''
+        self.__session.remove()
