@@ -75,7 +75,6 @@ class DBStorage():
 
     def close(self):
         '''
-        Call remove() method on the private session attribute
-        Info: https://docs.sqlalchemy.org/en/13/orm/contextual.html
+        method that close the session
         '''
         self.__session.remove()
