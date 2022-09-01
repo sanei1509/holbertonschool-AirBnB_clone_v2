@@ -82,9 +82,16 @@ def work_numbers(n):
 
 
 @app.teardown_appcontext
-def off_all():
+def off_all(self):
     """cerrar la sesión de SQL"""
     storage.close()
+
+
+@app.route("/states_list", strict_slashes=False)
+def states_list():
+    """ importando la data desde storage """
+    states = storage.all("State").values()
+    return render_template("7-states_list.html", states=states)
 
 
 """la app no corre al ser importada"""
