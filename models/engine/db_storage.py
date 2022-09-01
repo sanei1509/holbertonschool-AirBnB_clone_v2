@@ -36,22 +36,54 @@ class DBStorage():
         if val_env == "test":
             Base.metadata.drop_all(self.__engine)
 
+    # def all(self, cls=None):
+    #     """peticion de todos los objetos"""
+    #     obj_dic = {}
+    #     if not cls:
+    #         clases = ["User", "State", "City", "Amenity", "Place", "Review"]
+    #         for x in clases:
+    #             all_data = self.__session.query(x)
+    #             key = x + "." + x.id
+    #             obj_dic[key] = x
+    #         return obj_dic
+    #     else:
+    #         data = self.__session.query(cls).all()
+    #         for obj in data:
+    #             key = cls.__name__ + "." + obj.id
+    #             obj_dic[key] = obj
+    #         return obj_dic
+
     def all(self, cls=None):
-        """peticion de todos los objetos"""
-        obj_dic = {}
-        if not cls:
-            clases = ["User", "State", "City", "Amenity", "Place", "Review"]
-            for x in clases:
-                all_data = self.__session.query(x)
-                key = x + "." + x.id
-                obj_dic[key] = x
-            return obj_dic
+        """
+        def method all that return all objects depending of the class name
+        or return all if no class name is passed.
+        """
+        dic_return = {}
+        classes = {
+                'User': User, 'Place': Place,
+                'State': State, 'City': City, 'Amenity': Amenity,
+                'Review': Review
+                }
+        # Si no se pasa una clase, es porque se quiere todos los datos
+        if cls is None:
+            for clase in classes:
+                # Se obtiene la data en la query por todas las clases
+                data = self.__session.query(classes[clase]).all()
+                for obj in data:
+                    # Se obtiene la key para setear el obj en el dic a retornar
+                    key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                    # Se agregan los objetos en el diccionario a retornar
+                    dic_return[key] = obj
+            return dic_return
         else:
-            data = self.__session.query(cls).all() # change for task 7 add all()
-            for obj in data:
-                key = cls.__name__ + "." + obj.id
-                obj_dic[key] = obj
-            return obj_dic
+            # Esto es para cuando se pasa un clase especifica:
+            if classes[cls.__name__]:
+                # Se obtiene la data en la query por todas las clases
+                objects = self.__session.query(classes[cls.__name__]).all()
+                for obj in objects:
+                    key = type(obj).__name__ + '.' + obj.id
+                    dic_return[key] = obj
+            return dic_return
 
     def new(self, obj):
         '''add the boj to current db session'''
