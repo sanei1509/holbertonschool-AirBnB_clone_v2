@@ -47,7 +47,7 @@ class DBStorage():
                 obj_dic[key] = x
             return obj_dic
         else:
-            data = self.__session.query(cls)
+            data = self.__session.query(cls).all() # change for task 7 add all()
             for obj in data:
                 key = cls.__name__ + "." + obj.id
                 obj_dic[key] = obj
