@@ -70,7 +70,7 @@ def render_html(n):
     return render_template("5-number.html", number=n)
 
 
-@app.route('/number_odd_or_even/<int:n>')
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def work_numbers(n):
     """ Trabajar numeros pasados por parametros en la pagina """
     return render_template('6-number_odd_or_even.html', number=n)
