@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from flask import Flask, render_template
-from model import storage
+from models import storage
 from models.state import State
 """
 Starts a small web aplication
