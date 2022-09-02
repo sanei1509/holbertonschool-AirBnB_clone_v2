@@ -26,6 +26,7 @@ def filtro_data():
     """Contenido a mostra en la página html"""
     states = storage.all(State).values()
     lista_ams = storage.all(Amenity).values()
+    print(lista_ams)
     return render_template("10-hbnb_filters.html", states=states,
                            amenities=lista_ams)
 
