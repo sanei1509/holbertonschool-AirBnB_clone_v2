@@ -21,7 +21,7 @@
         <ul>
 			<!-- iterando ciudades de un estado -->
 			{% for city in state.cities | sort(attribute="name") %}
-                <li>{{ city.id }}: <b>{city.name}</b></li>
+                <li>{{ city.id }}: <b>{{ city.name }}</b></li>
 			{% endfor %}
         </ul>
 	{% else %}
