@@ -10,29 +10,6 @@ Starts a small web aplication
 - listening on 0.0.0.0 port 5000
 - display "Hello HBNB!"
 
-Task 1
--add route /hbnb
--display HBNB
-
-Task 2
--add route /c/<text>
--display parameter received
-
-Task 3
--crear una ruta alternativa
-
-Task 4
--mostrar solo si es un numero, ruta /number
-
-Task 5
--renderizar un template
-
-Task 6
--renderizar numeros impares
-
-Task 8
--renderizar una lista de elementos con jinja
-
 Task 10
 - renderizar un contenido html completo del clon
 """
