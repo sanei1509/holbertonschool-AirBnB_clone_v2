@@ -29,7 +29,8 @@
 }
 
 .popover {
-	overflow:scroll;
+	overflow: scroll;
+
 	list-style-type: none;
 	display: none;
 	background-color: #FAFAFA;
@@ -82,6 +83,9 @@ h4 {
 }
 
 button {
+	position: relative;
+	bottom: 20px;
+
 	color: #FFFFFF;
 	font-size: 18px;
 	
