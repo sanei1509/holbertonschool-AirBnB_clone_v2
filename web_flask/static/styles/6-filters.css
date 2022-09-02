@@ -29,6 +29,7 @@
 }
 
 .popover {
+	overflow:scroll;
 	list-style-type: none;
 	display: none;
 	background-color: #FAFAFA;
