@@ -1,30 +1,30 @@
 #!/usr/bin/python3
-from flask import Flask, render_template, request
+"""create app"""
+from flask import Flask, request, render_template
 from models import storage
 from models.state import State
 from models.amenity import Amenity
 from models.place import Place
-"""
-Starts a small web aplication
-- listening on 0.0.0.0 port 5000
-- display "Hello HBNB!"
-
-Task 10
-- renderizar un contenido html completo del clon
-"""
 app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def off_all(self):
-    """Cierro la sesión de my sql"""
+def tear_down(self):
+    """
+    After each request you must remove the current SQLAlchemy Session
+    """
     storage.close()
 
 
-@app.route('/hbnb_filters', strict_slashes=False)
-def filtro_data():
-    """Contenido a mostra en la página html"""
+@app.route("/hbnb_filters", strict_slashes=False)
+def states_list():
+    """Import data from storage"""
     states = storage.all(State).values()
-    lista_ams = storage.all(Amenity).values()
-    return render_template("10-hbnb_filters.html", states=states,
-                           amenities=lista_ams)
+    amenities = storage.all(Amenity).values()
+    print(amenities)
+    return render_template("10-hbnb_filters.html", states=states, amenities=amenities)
+
+
+if __name__ == '__main__':
+    """app run"""
+    app.run(host='0.0.0.0', port=5000)
