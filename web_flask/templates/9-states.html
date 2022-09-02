@@ -12,10 +12,11 @@
 				{% for state in states | sort(attribute="name") %}
 					<li>{{ state.id }} <b>{{ state.name }}</b></li>
 				{% endfor %}
-	{% endif %}
+	<!-- {% endif %} -->
 			</ul>
 	<!-- Si recibo un id de state por parametro -->
-	{% if state %}
+	{% else %}
+		{% if state %}
         <h1>State: {{ state.name }}</h1>
         <h1>Cities:</h1>
         <ul>
@@ -24,8 +25,9 @@
                 <li>{{ city.id }}: <b>{{ city.name }}</b></li>
 			{% endfor %}
         </ul>
-	{% else %}
+		{% else %}
 		<h1>Not found!</h1>
+		{% endif %}
 	{% endif %}
     </body>
 </html>
