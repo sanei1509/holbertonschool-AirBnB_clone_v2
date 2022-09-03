@@ -24,7 +24,8 @@
 					<li>{{ city.id }}: <b>{{ city.name }}</b></li>
 				{% endfor %}
 			</ul>
-	{% else %}
+	{% endif %}
+	{% if not state %}
 			<h1>Not found!</h1>
 	{% endif %}
     </body>
