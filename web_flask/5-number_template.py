@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-from flask import Flask, render_template
 """
 Starts a small web aplication
 - listening on 0.0.0.0 port 5000
@@ -24,6 +23,7 @@ Task 5
 
 crea
 """
+from flask import Flask, render_template
 
 app = Flask(__name__)
 """hacemos que las entradas sean flexible con los slashes (/)"""

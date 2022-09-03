@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-from flask import Flask
 """
 Starts a small web aplication
 - listening on 0.0.0.0 port 5000
@@ -13,6 +12,7 @@ Task 2
 -add route /c/<text>
 -display parameter received
 """
+from flask import Flask
 
 app = Flask(__name__)
 """hacemos que las entradas sean flexible con los slashes (/)"""

@@ -1,7 +1,4 @@
 #!/usr/bin/python3
-from flask import Flask, render_template
-from models import storage
-from models.state import State
 """
 Starts a small web aplication
 - listening on 0.0.0.0 port 5000
@@ -31,6 +28,9 @@ Task 8
 -renderizar una lista de elementos con jinja
 
 """
+from flask import Flask, render_template
+from models import storage
+from models.state import State
 
 app = Flask(__name__)
 """hacemos que las entradas sean flexible con los slashes (/)"""
