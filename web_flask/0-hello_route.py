@@ -2,8 +2,6 @@
 from flask import Flask
 """
 Starts a small web aplication
-- listening on 0.0.0.0 port 5000
-- display "Hello HBNB!"
 """
 app = Flask(__name__)
 
