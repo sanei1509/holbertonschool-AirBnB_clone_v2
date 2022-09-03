@@ -17,4 +17,3 @@ def hello_world():
 """la app no corre al ser importada"""
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
-
