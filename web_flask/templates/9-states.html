@@ -4,17 +4,13 @@
         <title>HBNB</title>
     </head>
     <body>
-	<!-- sino recibo un id como parametro -->
 	{% if states %}
 		<h1>States</h1>
 			<ul>
-				<!-- iterando estados -->
 				{% for state in states | sort(attribute="name") %}
 					<li>{{ state.id }} <b>{{ state.name }}</b></li>
 				{% endfor %}
-	<!-- {% endif %} -->
 			</ul>
-	<!-- Si recibo un id de state por parametro -->
 	{% if not states %}
 		{% if not state %}
 			<h1>Not found!</h1>
@@ -22,7 +18,6 @@
 				<h1>State: {{ state.name }}</h1>
 				<h1>Cities:</h1>
 				<ul>
-					<!-- iterando ciudades de un estado -->
 					{% for city in state.cities | sort(attribute="name") %}
 						<li>{{ city.id }}: <b>{{ city.name }}</b></li>
 					{% endfor %}
