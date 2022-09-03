@@ -34,7 +34,7 @@ def hbnb_route():
 def text_parse(text):
     """ formatear el texto correctamente """
     parse_text = text.replace('_', ' ')
-    return "{}".format(parse_text)
+    return "C {}".format(parse_text)
 
 
 """la app no corre al ser importada"""
