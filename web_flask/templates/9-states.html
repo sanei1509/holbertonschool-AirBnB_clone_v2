@@ -15,17 +15,19 @@
 	<!-- {% endif %} -->
 			</ul>
 	<!-- Si recibo un id de state por parametro -->
-	{% if not state %}
-		<h1>Not found!</h1>
 	{% else %}
-			<h1>State: {{ state.name }}</h1>
-			<h1>Cities:</h1>
-			<ul>
-				<!-- iterando ciudades de un estado -->
-				{% for city in state.cities | sort(attribute="name") %}
-					<li>{{ city.id }}: <b>{{ city.name }}</b></li>
-				{% endfor %}
-			</ul>
-	{% endif %}			
+		{% if not state %}
+			<h1>Not found!</h1>
+		{% else %}
+				<h1>State: {{ state.name }}</h1>
+				<h1>Cities:</h1>
+				<ul>
+					<!-- iterando ciudades de un estado -->
+					{% for city in state.cities | sort(attribute="name") %}
+						<li>{{ city.id }}: <b>{{ city.name }}</b></li>
+					{% endfor %}
+				</ul>
+		{% endif %}
+	{% endif %}		
     </body>
 </html>
