@@ -45,7 +45,7 @@ def hbnb_route():
 def text_parse(text):
     """ formatear el texto correctamente """
     parse_text = text.replace('_', ' ')
-    return f"{parse_text}"
+    return "{}".format(parse_text)
 
 
 @app.route("/python", defaults={'text': "is cool"}, strict_slashes=False)
@@ -53,13 +53,13 @@ def text_parse(text):
 def python_cool(text):
     """ Mostrar string por default sino se pasan parametros """
     parse_text = text.replace("_", " ")
-    return f"Python {parse_text}"
+    return "Python {}".format(parse_text)
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
     """Function, que muestre el numero solo si es un entero"""
-    return f"{n} is a number"
+    return "{} is a number".format(n)
 
 
 @app.route("/number_template/<n>", strict_slashes=False)
