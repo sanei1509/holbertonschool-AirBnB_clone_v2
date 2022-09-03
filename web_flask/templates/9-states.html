@@ -15,7 +15,7 @@
 	<!-- {% endif %} -->
 			</ul>
 	<!-- Si recibo un id de state por parametro -->
-	{% else %}
+	{% if not states %}
 		{% if not state %}
 			<h1>Not found!</h1>
 		{% else %}
