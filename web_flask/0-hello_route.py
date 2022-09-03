@@ -4,14 +4,13 @@ from flask import Flask
 Starts a small web aplication
 """
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
-@app.route("/", strict_slashes=False)
+@app.route('/')
 def hello_world():
-    """en la ruta default de la aplicación display string"""
+    """ Return a specific string """
     return "Hello HBNB!"
 
-
-"""la app no corre al ser importada"""
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
