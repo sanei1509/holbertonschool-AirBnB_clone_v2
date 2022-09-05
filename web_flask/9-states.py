@@ -99,7 +99,6 @@ def states_and_cities(id=None):
     """importando la data desde storage"""
     states = storage.all(State).values()
     for state in states:
-        if state in states:
             if state.id == id:
                 return render_template("9-states.html", state=state)
     return render_template("9-states.html", state=None)
